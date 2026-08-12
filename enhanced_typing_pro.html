@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Typing Pro — Free Typing Speed Test &amp; Practice</title>
+<meta name="description" content="Typing Pro is a free online typing speed test and practice website. Improve WPM, accuracy, typing speed and keyboard skills in English, Urdu, Hindi and Arabic.">
+<meta name="keywords" content="typing test, typing speed test, typing practice, WPM test, typing speed, keyboard practice, English typing, Urdu typing, Hindi typing, Arabic typing">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Typing Pro">
+<link rel="canonical" href="https://afrasiyabkhan1133-creator.github.io/my-website/">
+<meta property="og:title" content="Typing Pro — Free Typing Speed Test &amp; Practice">
+<meta property="og:description" content="Test and improve your typing speed, WPM and accuracy for free.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://afrasiyabkhan1133-creator.github.io/my-website/">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Typing Pro",
+  "url":"https://afrasiyabkhan1133-creator.github.io/my-website/",
+  "applicationCategory":"EducationalApplication",
+  "operatingSystem":"Any",
+  "description":"Free online typing speed test and typing practice tool with WPM, accuracy, progress tracking and multilingual practice.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&family=Noto+Sans+Arabic:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --font-ur:'Noto Nastaliq Urdu',serif;
+  --font-ar:'Noto Sans Arabic',sans-serif;
+  --font-hi:'Noto Sans Devanagari',sans-serif;
+  --radius-sm:8px;
+  --radius-md:14px;
+  --radius-lg:22px;
+  --ui-scale:1;
+  --type-scale:1;
+  --accent:#e7a64c;
+  --accent-strong:#f2bd6f;
+  --accent-ink:#3a2a10;
+  --correct:#31b978;
+  --incorrect:#e5484d;
+  --current-bg:rgba(231,166,76,.28);
+}
+html[data-theme="dark"]{
+  --bg:#121317;
+  --bg-soft:#181a20;
+  --surface:#1c1f26;
+  --surface-2:#242832;
+  --border:#333842;
+  --text:#eceae3;
+  --text-dim:#9497a3;
+  --text-faint:#5b5f6b;
+  --shadow:0 12px 30px rgba(0,0,0,.35);
+}
+html[data-theme="light"]{
+  --bg:#f2f0ea;
+  --bg-soft:#ebe8e0;
+  --surface:#ffffff;
+  --surface-2:#f4f2eb;
+  --border:#dcd8cd;
+  --text:#201f1c;
+  --text-dim:#66655f;
+  --text-faint:#a09e94;
+  --shadow:0 12px 26px rgba(90,80,60,.12);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  min-height:100vh;
+  transition:background .25s ease,color .25s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+body[dir-lang="ur"] .passage,body[dir-lang="ar"] .passage{font-family:var(--font-ar);}
+body[dir-lang="ur"] .passage{font-family:var(--font-ur);}
+body[dir-lang="hi"] .passage{font-family:var(--font-hi);}
+h1,h2,h3,.brand{font-family:var(--font-display);font-weight:600;margin:0;}
+button{font-family:var(--font-body);}
+.hidden{display:none !important;}
+a{color:inherit;}
+::selection{background:var(--accent);color:#1a1206;}
+
+/* Layout */
+#app{display:flex;flex-direction:column;min-height:100vh;}
+header.topbar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.brand{display:flex;align-items:center;gap:9px;font-size:20px;cursor:pointer;user-select:none;}
+.brand .mark{
+  width:30px;height:30px;border-radius:8px;
+  background:linear-gradient(145deg,var(--accent),#c97f2b);
+  display:flex;align-items:center;justify-content:center;
+  color:#241705;font-weight:700;font-family:var(--font-mono);font-size:14px;
+  box-shadow:0 3px 10px rgba(231,166,76,.35);
+}
+nav.mainnav{display:flex;gap:4px;align-items:center;}
+nav.mainnav button{
+  background:transparent;border:none;color:var(--text-dim);
+  padding:8px 14px;border-radius:999px;font-size:14px;font-weight:500;
+  cursor:pointer;transition:.15s;
+}
+nav.mainnav button:hover{color:var(--text);background:var(--surface-2);}
+nav.mainnav button.active{color:var(--accent-ink);background:var(--accent);}
+.icon-btn{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;transition:.15s;flex:none;
+}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent);}
+.topbar-right{display:flex;gap:8px;align-items:center;}
+.hamburger{display:none;}
+
+main{flex:1;width:100%;max-width:1180px;margin:0 auto;padding:26px 20px 70px;}
+
+/* Home */
+.hero{
+  padding:56px 10px 40px;text-align:center;
+}
+.hero .eyebrow{
+  font-family:var(--font-mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;display:inline-block;
+}
+.hero h1{font-size:clamp(30px,5.6vw,54px);line-height:1.08;margin-bottom:18px;}
+.type-demo{
+  font-family:var(--font-mono);font-size:clamp(15px,2.4vw,20px);color:var(--text-dim);
+  min-height:32px;margin-bottom:30px;
+}
+.type-demo .cursor{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-3px;animation:blink 1s steps(1) infinite;margin-left:2px;}
+@keyframes blink{50%{opacity:0;}}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+.btn{
+  border:none;cursor:pointer;font-weight:600;border-radius:12px;padding:13px 22px;font-size:15px;
+  transition:transform .12s ease, box-shadow .12s ease, background .15s;
+  font-family:var(--font-body);
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 20px rgba(231,166,76,.28);}
+.btn-primary:hover{background:var(--accent-strong);}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+.btn-sm{padding:8px 14px;font-size:13px;border-radius:9px;}
+
+.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px;}
+.nav-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:24px 20px;text-align:left;cursor:pointer;transition:.18s;box-shadow:var(--shadow);
+}
+.nav-card:hover{border-color:var(--accent);transform:translateY(-3px);}
+.nav-card .ni{font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:.08em;}
+.nav-card h3{font-size:19px;margin:10px 0 6px;}
+.nav-card p{color:var(--text-dim);font-size:13.5px;margin:0;line-height:1.5;}
+
+/* Setup panels */
+.panel{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:28px;max-width:760px;margin:0 auto;box-shadow:var(--shadow);
+}
+.panel h2{font-size:24px;margin-bottom:4px;}
+.panel .sub{color:var(--text-dim);font-size:14px;margin-bottom:24px;}
+.field-group{margin-bottom:22px;}
+.field-group>label{display:block;font-size:13px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+.chip-row{display:flex;gap:9px;flex-wrap:wrap;}
+.chip{
+  padding:10px 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);
+  color:var(--text);cursor:pointer;font-size:14px;font-weight:500;transition:.15s;
+}
+.chip:hover{border-color:var(--accent);}
+.chip.selected{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);}
+.custom-time-input{display:none;gap:8px;align-items:center;margin-top:10px;}
+.custom-time-input input{
+  width:90px;padding:9px 10px;border-radius:8px;border:1px solid var(--border);
+  background:var(--surface-2);color:var(--text);font-family:var(--font-mono);font-size:14px;
+}
+.panel-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:8px;}
+
+/* Typing run screen */
+.run-wrap{max-width:900px;margin:0 auto;}
+.run-topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+.stat-pills{display:flex;gap:10px;flex-wrap:wrap;}
+.pill{
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;
+  font-family:var(--font-mono);font-size:13px;color:var(--text-dim);display:flex;gap:6px;align-items:baseline;
+}
+.pill b{color:var(--text);font-size:16px;}
+.pill.timer b{color:var(--accent);}
+.passage-box{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:30px 28px;box-shadow:var(--shadow);position:relative;
+}
+.passage{
+  font-family:var(--font-mono);
+  font-size:calc(19px * var(--type-scale));
+  line-height:1.85;
+  letter-spacing:.2px;
+  color:var(--text-faint);
+  user-select:none;
+  word-wrap:break-word;
+}
+.passage span{border-radius:3px;padding:0 1px;}
+.passage span.correct{color:var(--correct);}
+.passage span.incorrect{color:var(--incorrect);background:rgba(229,72,77,.12);text-decoration:underline;text-decoration-color:var(--incorrect);}
+.passage span.current{background:var(--current-bg);color:var(--text);outline:1px solid var(--accent);}
+.passage span.pending{color:var(--text-faint);}
+.typing-input{
+  position:absolute;opacity:0;pointer-events:none;height:1px;width:1px;
+}
+.hint-row{display:flex;justify-content:space-between;align-items:center;margin-top:16px;color:var(--text-dim);font-size:13px;}
+.focus-cover{
+  position:absolute;inset:0;border-radius:var(--radius-lg);
+  background:color-mix(in srgb, var(--bg) 75%, transparent);
+  backdrop-filter:blur(2px);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
+  cursor:text;
+}
+.focus-cover span{font-size:14px;color:var(--text-dim);font-family:var(--font-body);}
+.run-actions{display:flex;justify-content:center;gap:10px;margin-top:20px;}
+
+/* Virtual keyboard */
+.vkb{margin-top:26px;user-select:none;}
+.vkb-row{display:flex;justify-content:center;gap:6px;margin-bottom:6px;}
+.vkey{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:7px;
+  min-width:34px;height:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:12px;color:var(--text-dim);flex:1;max-width:52px;padding:2px;
+  transition:.08s;
+}
+.vkey .top{font-size:10px;opacity:.6;line-height:1;}
+.vkey .bottom{line-height:1;font-size:13px;}
+.vkey.wide{max-width:none;flex:2;}
+.vkey.space{flex:8;max-width:none;}
+.vkey.active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:translateY(1px);}
+.vkey.on{outline:2px solid var(--accent);}
+
+/* Results */
+.result-panel{max-width:760px;margin:0 auto;text-align:center;}
+.result-panel h2{font-size:26px;margin-bottom:6px;}
+.result-panel .sub{color:var(--text-dim);margin-bottom:30px;}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);
+  padding:20px 12px;box-shadow:var(--shadow);
+}
+.stat-card .v{font-family:var(--font-mono);font-size:26px;font-weight:700;color:var(--accent);}
+.stat-card .l{font-size:12px;color:var(--text-dim);margin-top:6px;text-transform:uppercase;letter-spacing:.05em;}
+.stat-card.correct .v{color:var(--correct);}
+.stat-card.incorrect .v{color:var(--incorrect);}
+
+/* Progress */
+.progress-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:30px;}
+.chart-box{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:24px;margin-bottom:26px;box-shadow:var(--shadow);
+}
+.chart-box h3{font-size:16px;margin-bottom:16px;color:var(--text-dim);font-weight:600;}
+table.history{width:100%;border-collapse:collapse;font-size:13.5px;}
+table.history th{text-align:left;color:var(--text-dim);font-weight:600;padding:10px 8px;border-bottom:1px solid var(--border);font-size:12px;text-transform:uppercase;letter-spacing:.04em;}
+table.history td{padding:10px 8px;border-bottom:1px solid var(--border);font-family:var(--font-mono);}
+.empty-state{text-align:center;padding:50px 20px;color:var(--text-dim);}
+.empty-state .glyph{font-size:38px;margin-bottom:10px;}
+
+/* Settings */
+.settings-grid{display:grid;grid-template-columns:1fr;gap:0;max-width:640px;margin:0 auto;}
+.setting-row{
+  display:flex;justify-content:space-between;align-items:center;padding:18px 4px;border-bottom:1px solid var(--border);
+  gap:16px;
+}
+.setting-row .label{font-weight:500;}
+.setting-row .desc{font-size:12.5px;color:var(--text-dim);margin-top:3px;}
+select.set-select{
+  padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);
+  font-family:var(--font-body);font-size:14px;
+}
+.switch{position:relative;width:46px;height:26px;flex:none;}
+.switch input{opacity:0;width:0;height:0;}
+.switch .track{position:absolute;inset:0;background:var(--surface-2);border:1px solid var(--border);border-radius:20px;cursor:pointer;transition:.2s;}
+.switch .track:before{content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:var(--text-dim);border-radius:50%;transition:.2s;}
+.switch input:checked + .track{background:var(--accent);border-color:var(--accent);}
+.switch input:checked + .track:before{transform:translateX(20px);background:#241705;}
+.slider-row{display:flex;align-items:center;gap:12px;width:220px;}
+input[type=range]{flex:1;accent-color:var(--accent);}
+
+footer.foot{text-align:center;padding:26px;color:var(--text-faint);font-size:12.5px;font-family:var(--font-mono);}
+
+
+/* ---------------- Advanced UI ---------------- */
+.home-dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0 8px;text-align:left;}
+.dash-card{background:linear-gradient(145deg,var(--surface),var(--surface-2));border:1px solid var(--border);border-radius:16px;padding:16px;min-height:105px;box-shadow:var(--shadow);}
+.dash-card span{display:block;color:var(--text-faint);font:600 10px var(--font-mono);letter-spacing:.08em;margin-bottom:8px;}
+.dash-card b{display:block;font:700 21px var(--font-mono);color:var(--accent);}
+.dash-card small{display:block;color:var(--text-dim);font-size:11px;margin-top:7px;line-height:1.35;}
+.goal-bar{height:6px;background:var(--border);border-radius:99px;margin-top:12px;overflow:hidden;}
+.goal-bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .3s;}
+.daily-panel{max-width:820px;}
+.daily-hero-card{display:flex;justify-content:space-between;align-items:center;gap:18px;background:var(--surface-2);border:1px solid var(--border);border-radius:16px;padding:20px;margin:22px 0;}
+.daily-date{font:600 12px var(--font-mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em;}
+.daily-title{font:700 22px var(--font-display);margin-top:6px;}
+.daily-meta{font-size:13px;color:var(--text-dim);margin-top:5px;}
+.streak-badge{padding:12px 16px;border:1px solid var(--border);border-radius:12px;background:var(--surface);font-family:var(--font-mono);white-space:nowrap;}
+.streak-badge b{color:var(--accent);font-size:20px;}
+.streak-badge span{color:var(--text-dim);font-size:11px;}
+.daily-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 20px;}
+.achievement-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.achievement{display:flex;align-items:center;gap:12px;border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:12px;}
+.achievement .badge{font-size:25px;width:38px;text-align:center;}
+.achievement b{display:block;font-size:14px;}
+.achievement small{display:block;color:var(--text-dim);font-size:11px;margin-top:3px;}
+@media (max-width:900px){.home-dashboard{grid-template-columns:repeat(2,1fr);}.daily-stats{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.home-dashboard{grid-template-columns:1fr;}.daily-hero-card{flex-direction:column;align-items:flex-start;}.daily-stats{grid-template-columns:1fr;}.achievement-grid{grid-template-columns:1fr;}}
+
+/* Responsive */
+@media (max-width:900px){
+  .card-grid{grid-template-columns:repeat(2,1fr);}
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .progress-cards{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:720px){
+  nav.mainnav{display:none;position:fixed;top:64px;left:0;right:0;background:var(--bg);
+    border-bottom:1px solid var(--border);flex-direction:column;padding:10px;gap:4px;z-index:60;box-shadow:var(--shadow);}
+  nav.mainnav.open{display:flex;}
+  nav.mainnav button{width:100%;text-align:left;padding:12px 14px;}
+  .hamburger{display:flex;}
+  .vkb{display:none;}
+  .vkb.force-show{display:block;}
+}
+@media (max-width:560px){
+  .card-grid{grid-template-columns:1fr;}
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .progress-cards{grid-template-columns:repeat(2,1fr);}
+  .passage-box{padding:20px 16px;}
+  .panel{padding:20px;}
+  main{padding:18px 14px 60px;}
+  .run-topline{justify-content:center;text-align:center;}
+}
+</style>
+</head>
+<body dir-lang="en">
+<div id="app">
+
+<header class="topbar">
+  <div class="brand" data-nav="home"><div class="mark">TP</div>Typing Pro</div>
+  <button class="icon-btn hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+  <nav class="mainnav" id="mainNav">
+    <button data-nav="home">Home</button>
+    <button data-nav="test-setup">Typing Test</button>
+    <button data-nav="practice-setup">Practice</button>
+    <button data-nav="progress">Progress</button>
+    <button data-nav="daily">Daily Challenge</button>
+    <button data-nav="settings">Settings</button>
+  </nav>
+  <div class="topbar-right">
+    <button class="icon-btn" id="themeToggle" title="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HOME -->
+  <section id="screen-home" class="screen">
+    <div class="hero">
+      <span class="eyebrow">FREE · NO LOGIN · YOUR DATA STAYS ON THIS DEVICE</span>
+      <h1>Master your typing.<br>One test at a time.</h1>
+      <div class="type-demo" id="typeDemo"><span id="typeDemoText"></span><span class="cursor"></span></div>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-nav="test-setup">Start Typing Test</button>
+        <button class="btn btn-ghost" data-nav="practice-setup">Go to Practice</button>
+      </div>
+      <div class="home-dashboard" id="homeDashboard"></div>
+    </div>
+    <div class="card-grid">
+      <div class="nav-card" data-nav="test-setup"><div class="ni">01 · TIMED</div><h3>Typing Test</h3><p>Race the clock across 30s, 1m, 2m, 5m or a custom timer, then see your WPM instantly.</p></div>
+      <div class="nav-card" data-nav="practice-setup"><div class="ni">02 · DRILLS</div><h3>Practice</h3><p>Alphabet, words, sentences, numbers, symbols and mixed drills across three difficulty levels.</p></div>
+      <div class="nav-card" data-nav="progress"><div class="ni">03 · STATS</div><h3>Progress</h3><p>Track your best and average WPM, accuracy trends and full test history over time.</p></div>
+      <div class="nav-card" data-nav="daily"><div class="ni">04 · DAILY</div><h3>Daily Challenge</h3><p>A fresh challenge every day. Build your streak and try to beat your personal best.</p></div>
+      <div class="nav-card" data-nav="settings"><div class="ni">05 · TUNE</div><h3>Settings</h3><p>Theme, language, font size, sound, keyboard and personal goals — all saved on this device.</p></div>
+    </div>
+  </section>
+
+  <!-- TEST SETUP -->
+  <section id="screen-test-setup" class="screen hidden">
+    <div class="panel">
+      <h2>Typing Test</h2>
+      <p class="sub">Choose a duration, language and difficulty, then start typing the moment you're ready.</p>
+      <div class="field-group">
+        <label>Duration</label>
+        <div class="chip-row" id="durationChips">
+          <div class="chip" data-dur="30">30 sec</div>
+          <div class="chip selected" data-dur="60">1 min</div>
+          <div class="chip" data-dur="120">2 min</div>
+          <div class="chip" data-dur="300">5 min</div>
+          <div class="chip" data-dur="custom">Custom</div>
+        </div>
+        <div class="custom-time-input" id="customTimeRow">
+          <input type="number" id="customSeconds" min="5" max="3600" value="90" placeholder="seconds">
+          <span style="color:var(--text-dim);font-size:13px;">seconds</span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Language</label>
+        <div class="chip-row" id="testLangChips">
+          <div class="chip selected" data-lang="en">English</div>
+          <div class="chip" data-lang="ur">اردو (Urdu)</div>
+          <div class="chip" data-lang="hi">हिन्दी (Hindi)</div>
+          <div class="chip" data-lang="ar">العربية (Arabic)</div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Difficulty</label>
+        <div class="chip-row" id="testLevelChips">
+          <div class="chip selected" data-level="beginner">Beginner</div>
+          <div class="chip" data-level="intermediate">Intermediate</div>
+          <div class="chip" data-level="advanced">Advanced</div>
+        </div>
+      </div>
+      <div class="panel-actions">
+        <button class="btn btn-ghost" data-nav="home">Cancel</button>
+        <button class="btn btn-primary" id="startTestBtn">Start Test →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICE SETUP -->
+  <section id="screen-practice-setup" class="screen hidden">
+    <div class="panel">
+      <h2>Practice</h2>
+      <p class="sub">Drill a specific skill. No timer pressure — take it at your own pace.</p>
+      <div class="field-group">
+        <label>Category</label>
+        <div class="chip-row" id="categoryChips">
+          <div class="chip selected" data-cat="alphabet">Alphabet</div>
+          <div class="chip" data-cat="words">Words</div>
+          <div class="chip" data-cat="sentences">Sentences</div>
+          <div class="chip" data-cat="numbers">Numbers</div>
+          <div class="chip" data-cat="symbols">Symbols</div>
+          <div class="chip" data-cat="mixed">Mixed</div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Language</label>
+        <div class="chip-row" id="practiceLangChips">
+          <div class="chip selected" data-lang="en">English</div>
+          <div class="chip" data-lang="ur">اردو (Urdu)</div>
+          <div class="chip" data-lang="hi">हिन्दी (Hindi)</div>
+          <div class="chip" data-lang="ar">العربية (Arabic)</div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Difficulty</label>
+        <div class="chip-row" id="practiceLevelChips">
+          <div class="chip selected" data-level="beginner">Beginner</div>
+          <div class="chip" data-level="intermediate">Intermediate</div>
+          <div class="chip" data-level="advanced">Advanced</div>
+        </div>
+      </div>
+      <div class="panel-actions">
+        <button class="btn btn-ghost" data-nav="home">Cancel</button>
+        <button class="btn btn-primary" id="startPracticeBtn">Start Practice →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RUN SCREEN (shared by test + practice) -->
+  <section id="screen-run" class="screen hidden">
+    <div class="run-wrap">
+      <div class="run-topline">
+        <div class="stat-pills">
+          <div class="pill timer" id="pillTimer"><span>⏱</span><b id="timeLeft">--</b></div>
+          <div class="pill"><span>WPM</span><b id="liveWpm">0</b></div>
+          <div class="pill"><span>ACC</span><b id="liveAcc">100%</b></div>
+          <div class="pill"><span>ERR</span><b id="liveErr">0</b></div>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="quitRunBtn">Exit</button>
+      </div>
+      <div class="passage-box">
+        <div class="passage" id="passageEl" tabindex="0"></div>
+        <input class="typing-input" id="typingInput" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <div class="focus-cover hidden" id="focusCover"><span>Click here (or tap) and start typing to begin</span></div>
+      </div>
+      <div class="hint-row">
+        <span id="runModeLabel">Test mode</span>
+        <span>Backspace to correct mistakes</span>
+      </div>
+      <div class="run-actions">
+        <button class="btn btn-ghost btn-sm" id="restartRunBtn">Restart</button>
+      </div>
+      <div class="vkb" id="vkb"></div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="screen-result" class="screen hidden">
+    <div class="result-panel">
+      <h2>Result</h2>
+      <p class="sub" id="resultSub">Here's how you did.</p>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="v" id="resWpm">0</div><div class="l">WPM</div></div>
+        <div class="stat-card"><div class="v" id="resAcc">0%</div><div class="l">Accuracy</div></div>
+        <div class="stat-card correct"><div class="v" id="resCorrect">0</div><div class="l">Correct chars</div></div>
+        <div class="stat-card incorrect"><div class="v" id="resIncorrect">0</div><div class="l">Incorrect chars</div></div>
+        <div class="stat-card"><div class="v" id="resTotal">0</div><div class="l">Total chars</div></div>
+        <div class="stat-card"><div class="v" id="resMistakes">0</div><div class="l">Mistakes</div></div>
+        <div class="stat-card"><div class="v" id="resTime">0s</div><div class="l">Time taken</div></div>
+        <div class="stat-card"><div class="v" id="resGross">0</div><div class="l">Gross WPM</div></div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="tryAgainBtn">Try Again</button>
+        <button class="btn btn-ghost" data-nav="progress">View Progress</button>
+        <button class="btn btn-ghost" id="shareResultBtn">Share Result</button>
+        <button class="btn btn-ghost" id="exportResultBtn">Save Result</button>
+        <button class="btn btn-ghost" data-nav="home">Home</button>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- DAILY CHALLENGE -->
+  <section id="screen-daily" class="screen hidden">
+    <div class="panel daily-panel">
+      <span class="eyebrow">DAILY CHALLENGE</span>
+      <h2>Today's Typing Challenge</h2>
+      <p class="sub">Complete today's challenge to grow your streak. The challenge changes automatically each day.</p>
+      <div class="daily-hero-card">
+        <div>
+          <div class="daily-date" id="dailyDate">Today</div>
+          <div class="daily-title">60-second speed challenge</div>
+          <div class="daily-meta">English · Intermediate · Sentences</div>
+        </div>
+        <div class="streak-badge">🔥 <b id="dailyStreak">0</b><span> day streak</span></div>
+      </div>
+      <div class="daily-stats" id="dailyStats"></div>
+      <div class="panel-actions">
+        <button class="btn btn-ghost" data-nav="home">Back</button>
+        <button class="btn btn-primary" id="startDailyBtn">Start Daily Challenge →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRESS -->
+  <section id="screen-progress" class="screen hidden">
+    <h2 style="margin-bottom:20px;">Your Progress</h2>
+    <div id="progressContent"></div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="screen-settings" class="screen hidden">
+    <h2 style="margin-bottom:20px;">Settings</h2>
+    <div class="panel">
+      <div class="settings-grid">
+        <div class="setting-row">
+          <div><div class="label">Theme</div><div class="desc">Dark or light interface</div></div>
+          <div class="chip-row"><div class="chip" id="setThemeDark">Dark</div><div class="chip" id="setThemeLight">Light</div></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="label">Language</div><div class="desc">Default language for tests &amp; practice</div></div>
+          <select class="set-select" id="setLanguage">
+            <option value="en">English</option>
+            <option value="ur">اردو (Urdu)</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            <option value="ar">العربية (Arabic)</option>
+          </select>
+        </div>
+        <div class="setting-row">
+          <div><div class="label">UI Font Size</div><div class="desc">Size of interface text</div></div>
+          <div class="slider-row"><input type="range" id="setFontSize" min="0.85" max="1.25" step="0.05"><span id="fontSizeVal">100%</span></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="label">Typing Text Size</div><div class="desc">Size of the passage you type</div></div>
+          <div class="slider-row"><input type="range" id="setTypeSize" min="0.8" max="1.6" step="0.05"><span id="typeSizeVal">100%</span></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="label">Default Timer</div><div class="desc">Preselected duration for new tests</div></div>
+          <select class="set-select" id="setTimerDefault">
+            <option value="30">30 seconds</option>
+            <option value="60">1 minute</option>
+            <option value="120">2 minutes</option>
+            <option value="300">5 minutes</option>
+          </select>
+        </div>
+        <div class="setting-row">
+          <div><div class="label">Sound</div><div class="desc">Play a click on keystrokes</div></div>
+          <label class="switch"><input type="checkbox" id="setSound"><span class="track"></span></label>
+        </div>
+        <div class="setting-row">
+          <div><div class="label">Virtual Keyboard</div><div class="desc">Show the on-screen keyboard while typing</div></div>
+          <label class="switch"><input type="checkbox" id="setKeyboard"><span class="track"></span></label>
+        </div>
+        <div class="setting-row">
+          <div><div class="label">Daily WPM Goal</div><div class="desc">Your personal target for the progress dashboard</div></div>
+          <div class="slider-row"><input type="range" id="setGoal" min="10" max="150" step="5"><span id="goalVal">50</span></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="label">Export History</div><div class="desc">Download your typing history as a CSV file</div></div>
+          <button class="btn btn-ghost btn-sm" id="exportHistoryBtn">Export CSV</button>
+        </div>
+        <div class="setting-row" style="border-bottom:none;">
+          <div><div class="label">Reset all data</div><div class="desc">Clears settings and test history from this device</div></div>
+          <button class="btn btn-ghost btn-sm" id="resetDataBtn">Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">Typing Pro · Free typing practice & speed test · Your data stays on this device</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------- Content data ---------------- */
+const ALPHABETS = {
+  en: 'abcdefghijklmnopqrstuvwxyz',
+  ur: ['ا','ب','پ','ت','ٹ','ث','ج','چ','ح','خ','د','ڈ','ذ','ر','ڑ','ز','ژ','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ک','گ','ل','م','ن','و','ہ','ھ','ء','ی','ے'],
+  hi: ['अ','आ','इ','ई','उ','ऊ','ए','ऐ','ओ','औ','क','ख','ग','घ','च','छ','ज','झ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह'],
+  ar: ['ا','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي']
+};
+
+const TEXTS = {
+  en:{
+    beginner:{
+      words:['cat','dog','sun','run','big','red','cup','box','pen','hat','top','bag','fan','jar','key','map','net','owl','pot','rug','sit','tap','van','wax','yes','zip','ant','bee','cow','egg'],
+      sentences:['The cat sat on the mat.','I like to run and play.','The sun is very hot today.','She has a red pen.','We can see the big dog.','My bag is on the desk.','He can jump very high.','The cup is on the table.']
+    },
+    intermediate:{
+      words:['about','after','again','begin','below','bring','build','carry','clean','close','count','cover','dance','early','earth','enjoy','field','first','front','grand','happy','house','judge','known','learn','light','money','music','night','ocean','paper','quiet','reach','river','sleep','small','sound','table','teach','under','value','water','world','write','young'],
+      sentences:['The early bird catches the worm every single morning.','She decided to learn a new skill this year.','Our teacher asked us to write a short story.','The river flows quietly through the green valley.','He enjoys reading books about ancient history.','They built a small house near the ocean.','Good habits are formed through steady daily practice.']
+    },
+    advanced:{
+      words:['abundant','beautiful','challenge','determine','elephant','fantastic','generous','hospital','important','journalist','knowledge','landscape','magnificent','necessary','opportunity','philosophy','qualified','recognize','structure','technology','university','vocabulary','wonderful','xylophone','yesterday','zealously'],
+      sentences:['The committee unanimously approved the ambitious proposal despite several lingering concerns.','Photosynthesis, a complex biochemical process, converts sunlight into usable energy.','Despite the economic downturn, the company increased its quarterly revenue by 12%.','The archaeologists discovered an intricately carved artifact beneath the ancient ruins.','Quantum mechanics challenges our fundamental understanding of reality at small scales!','"Success," she said, "is rarely achieved without persistent effort & discipline."']
+    }
+  },
+  ur:{
+    beginner:{
+      words:['گھر','پانی','کتاب','دوست','باغ','آسمان','سورج','چاند','پھول','درخت','روٹی','دودھ','قلم','میز','دروازہ'],
+      sentences:['یہ میرا گھر ہے۔','آسمان نیلا ہے۔','وہ کتاب پڑھ رہا ہے۔','بچے باغ میں کھیل رہے ہیں۔','ماں کھانا بنا رہی ہے۔','یہ میرا دوست ہے۔']
+    },
+    intermediate:{
+      words:['محنت','تعلیم','خوشی','محبت','امید','زندگی','دنیا','علم','وقت','سچائی','ہمت','دانائی'],
+      sentences:['محنت کامیابی کی کنجی ہے۔','علم انسان کو روشنی دیتا ہے۔','ہمیں ہمیشہ سچ بولنا چاہیے۔','وقت کی قدر کرنی چاہیے۔','اچھی عادتیں محنت سے بنتی ہیں۔']
+    },
+    advanced:{
+      words:['ذمہ داری','تجربہ','ماحولیات','ٹیکنالوجی','سائنسدان','معیشت','آزادی','ثقافت'],
+      sentences:['علم حاصل کرنا ہر انسان پر فرض ہے، چاہے حالات کیسے بھی ہوں۔','ٹیکنالوجی نے ہماری زندگی کو مکمل طور پر بدل دیا ہے۔','معاشرے کی ترقی کے لیے تعلیم بنیادی حیثیت رکھتی ہے۔']
+    }
+  },
+  hi:{
+    beginner:{
+      words:['घर','पानी','किताब','दोस्त','बगीचा','आकाश','सूरज','चाँद','फूल','पेड़','रोटी','दूध','कलम','मेज़'],
+      sentences:['यह मेरा घर है।','आकाश नीला है।','वह किताब पढ़ रहा है।','बच्चे बगीचे में खेल रहे हैं।','माँ खाना बना रही है।','यह मेरा दोस्त है।']
+    },
+    intermediate:{
+      words:['मेहनत','शिक्षा','खुशी','प्रेम','आशा','जीवन','दुनिया','ज्ञान','समय','सच्चाई','हिम्मत','समझदारी'],
+      sentences:['मेहनत सफलता की कुंजी है।','ज्ञान इंसान को रोशनी देता है।','हमें हमेशा सच बोलना चाहिए।','समय की कद्र करनी चाहिए।','अच्छी आदतें मेहनत से बनती हैं।']
+    },
+    advanced:{
+      words:['ज़िम्मेदारी','अनुभव','पर्यावरण','प्रौद्योगिकी','वैज्ञानिक','अर्थव्यवस्था','स्वतंत्रता','संस्कृति'],
+      sentences:['ज्ञान प्राप्त करना हर इंसान का कर्तव्य है, चाहे हालात कैसे भी हों।','प्रौद्योगिकी ने हमारे जीवन को पूरी तरह बदल दिया है।','समाज की उन्नति के लिए शिक्षा बुनियादी महत्व रखती है।']
+    }
+  },
+  ar:{
+    beginner:{
+      words:['بيت','ماء','كتاب','صديق','حديقة','سماء','شمس','قمر','زهرة','شجرة','خبز','حليب','قلم','طاولة'],
+      sentences:['هذا بيتي.','السماء زرقاء.','هو يقرأ كتابا.','الأطفال يلعبون في الحديقة.','الأم تطبخ الطعام.','هذا صديقي.']
+    },
+    intermediate:{
+      words:['عمل','تعليم','سعادة','حب','أمل','حياة','عالم','علم','وقت','حقيقة','شجاعة','حكمة'],
+      sentences:['العمل الجاد هو مفتاح النجاح.','العلم يضيء طريق الإنسان.','يجب علينا دائما أن نقول الحقيقة.','يجب أن نقدر الوقت.','العادات الجيدة تُبنى بالممارسة.']
+    },
+    advanced:{
+      words:['مسؤولية','تجربة','بيئة','تكنولوجيا','عالِم','اقتصاد','حرية','ثقافة'],
+      sentences:['طلب العلم واجب على كل إنسان مهما كانت الظروف.','غيّرت التكنولوجيا حياتنا بشكل كامل.','يعتبر التعليم أمرا أساسيا لتقدم المجتمع.']
+    }
+  }
+};
+
+const RTL_LANGS = {ur:true, ar:true};
+
+/* ---------------- State & persistence ---------------- */
+const DEFAULT_SETTINGS = {
+  theme:'dark', language:'en', fontSize:1, typeSize:1, timerDefault:60, sound:false, keyboard:true, goal:50
+};
+let settings = loadSettings();
+let stats = loadStats();
+
+function loadSettings(){
+  try{ const s = JSON.parse(localStorage.getItem('typeforge_settings')); return Object.assign({}, DEFAULT_SETTINGS, s||{}); }
+  catch(e){ return Object.assign({}, DEFAULT_SETTINGS); }
+}
+function saveSettings(){ try{ localStorage.setItem('typeforge_settings', JSON.stringify(settings)); }catch(e){} }
+function loadStats(){
+  try{ const s = JSON.parse(localStorage.getItem('typeforge_stats')); return Array.isArray(s)? s : []; }
+  catch(e){ return []; }
+}
+function saveStats(){ try{ localStorage.setItem('typeforge_stats', JSON.stringify(stats)); }catch(e){} }
+
+/* ---------------- Navigation ---------------- */
+const screens = ['home','test-setup','practice-setup','run','result','progress','daily','settings'];
+function showScreen(name){
+  screens.forEach(s=>{
+    document.getElementById('screen-'+s).classList.toggle('hidden', s!==name);
+  });
+  document.querySelectorAll('nav.mainnav button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.nav === (name==='test-setup'?'test-setup':name==='practice-setup'?'practice-setup':name));
+  });
+  document.getElementById('mainNav').classList.remove('open');
+  if(name==='progress') renderProgress();
+  if(name==='daily') renderDaily();
+  if(name==='home') renderHomeDashboard();
+  window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
+  if(name!=='run') stopEngine();
+}
+document.querySelectorAll('[data-nav]').forEach(el=>{
+  el.addEventListener('click', ()=>showScreen(el.dataset.nav));
+});
+document.getElementById('hamburgerBtn').addEventListener('click', ()=>{
+  document.getElementById('mainNav').classList.toggle('open');
+});
+
+/* ---------------- Theme ---------------- */
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', settings.theme);
+  document.getElementById('themeToggle').textContent = settings.theme==='dark' ? '☀️' : '🌙';
+}
+document.getElementById('themeToggle').addEventListener('click', ()=>{
+  settings.theme = settings.theme==='dark' ? 'light' : 'dark';
+  applyTheme(); saveSettings(); syncSettingsUI();
+});
+
+/* ---------------- Apply UI-wide settings ---------------- */
+function applyGlobalStyles(){
+  document.documentElement.style.setProperty('--ui-scale', settings.fontSize);
+  document.documentElement.style.setProperty('--type-scale', settings.typeSize);
+  document.body.style.fontSize = (14 * settings.fontSize) + 'px';
+}
+
+/* ---------------- Home hero typing demo ---------------- */
+const demoPhrases = ['Practice makes precision.','مشق سے مہارت آتی ہے۔','अभ्यास से ही महारत आती है।','التدريب يصنع الإتقان.'];
+let demoIdx=0, demoChar=0, demoDeleting=false;
+function runDemo(){
+  const el = document.getElementById('typeDemoText');
+  const full = demoPhrases[demoIdx];
+  if(!demoDeleting){
+    demoChar++;
+    el.textContent = full.slice(0, demoChar);
+    if(demoChar>=full.length){ demoDeleting=true; setTimeout(runDemo,1300); return; }
+  } else {
+    demoChar--;
+    el.textContent = full.slice(0, demoChar);
+    if(demoChar<=0){ demoDeleting=false; demoIdx=(demoIdx+1)%demoPhrases.length; }
+  }
+  setTimeout(runDemo, demoDeleting?28:55);
+}
+runDemo();
+
+/* ---------------- Setup screens: chip selection ---------------- */
+function wireChips(containerId, dataAttr, onSelect){
+  const container = document.getElementById(containerId);
+  container.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      container.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
+      chip.classList.add('selected');
+      onSelect(chip.dataset[dataAttr]);
+    });
+  });
+}
+let testConfig = {duration:60, language:'en', level:'beginner'};
+wireChips('durationChips','dur', v=>{
+  document.getElementById('customTimeRow').style.display = v==='custom' ? 'flex':'none';
+  testConfig.duration = v==='custom' ? parseInt(document.getElementById('customSeconds').value||'60',10) : parseInt(v,10);
+});
+document.getElementById('customSeconds').addEventListener('input', e=>{
+  if(document.querySelector('#durationChips .chip.selected').dataset.dur==='custom'){
+    testConfig.duration = Math.max(5, parseInt(e.target.value||'60',10));
+  }
+});
+wireChips('testLangChips','lang', v=> testConfig.language=v);
+wireChips('testLevelChips','level', v=> testConfig.level=v);
+
+let practiceConfig = {category:'alphabet', language:'en', level:'beginner'};
+wireChips('categoryChips','cat', v=> practiceConfig.category=v);
+wireChips('practiceLangChips','lang', v=> practiceConfig.language=v);
+wireChips('practiceLevelChips','level', v=> practiceConfig.level=v);
+
+document.getElementById('startTestBtn').addEventListener('click', ()=>{
+  startRun({mode:'test', duration:testConfig.duration, language:testConfig.language, level:testConfig.level, category:'sentences'});
+});
+document.getElementById('startPracticeBtn').addEventListener('click', ()=>{
+  startRun({mode:'practice', duration:null, language:practiceConfig.language, level:practiceConfig.level, category:practiceConfig.category});
+});
+document.getElementById('startDailyBtn').addEventListener('click', ()=>{
+  startRun({mode:'test', duration:60, language:'en', level:'intermediate', category:'sentences', daily:true});
+});
+
+/* ---------------- Passage generation ---------------- */
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function pickRandom(arr,n){ const out=[]; for(let i=0;i<n;i++) out.push(arr[Math.floor(Math.random()*arr.length)]); return out; }
+
+function genNumbersChunk(){
+  const tokens=[];
+  for(let i=0;i<10;i++){
+    const len = 1+Math.floor(Math.random()*4);
+    let n='';
+    for(let j=0;j<len;j++) n += Math.floor(Math.random()*10);
+    tokens.push(n);
+  }
+  return tokens.join(' ');
+}
+const SYMBOL_SET = ['!','@','#','$','%','^','&','*','(',')','-','_','=','+','[',']','{','}',';',':',"'",'"',',','.','<','>','/','?'];
+function genSymbolsChunk(){
+  const tokens=[];
+  for(let i=0;i<8;i++){
+    const len = 2+Math.floor(Math.random()*3);
+    let s='';
+    for(let j=0;j<len;j++) s += SYMBOL_SET[Math.floor(Math.random()*SYMBOL_SET.length)];
+    tokens.push(s);
+  }
+  return tokens.join(' ');
+}
+function genMixedChunk(lang){
+  const words = TEXTS[lang][practiceLevelSafe()].words;
+  const tokens=[];
+  for(let i=0;i<10;i++){
+    const r = Math.random();
+    if(r<0.4) tokens.push(pickRandom(words,1)[0]);
+    else if(r<0.65){ let n=''; const len=1+Math.floor(Math.random()*3); for(let j=0;j<len;j++) n+=Math.floor(Math.random()*10); tokens.push(n); }
+    else if(r<0.85) tokens.push(SYMBOL_SET[Math.floor(Math.random()*SYMBOL_SET.length)]);
+    else tokens.push(pickRandom(words,1)[0]+SYMBOL_SET[Math.floor(Math.random()*SYMBOL_SET.length)]);
+  }
+  return tokens.join(' ');
+}
+function practiceLevelSafe(){ return currentRun.level in {beginner:1,intermediate:1,advanced:1} ? currentRun.level : 'beginner'; }
+
+function genAlphabetChunk(lang){
+  const letters = ALPHABETS[lang];
+  if(lang==='en'){
+    const lower = letters.split('');
+    const upper = letters.toUpperCase().split('');
+    const seq = currentRun.level==='beginner'? shuffle(lower).slice(0,12)
+              : currentRun.level==='intermediate'? shuffle(lower.concat(upper)).slice(0,16)
+              : shuffle(lower.concat(upper)).slice(0,20);
+    return seq.join(' ');
+  } else {
+    const seq = shuffle(letters).slice(0, currentRun.level==='beginner'?10:currentRun.level==='intermediate'?14:18);
+    return seq.join(' ');
+  }
+}
+
+function genChunk(category, lang, level){
+  const data = TEXTS[lang][level] || TEXTS[lang].beginner;
+  if(category==='alphabet') return genAlphabetChunk(lang);
+  if(category==='words') return pickRandom(data.words, 12).join(' ');
+  if(category==='sentences') return pickRandom(data.sentences, 3).join(' ');
+  if(category==='numbers') return genNumbersChunk();
+  if(category==='symbols') return genSymbolsChunk();
+  if(category==='mixed') return genMixedChunk(lang);
+  return pickRandom(data.words,12).join(' ');
+}
+
+/* ---------------- Run engine ---------------- */
+let currentRun = null; // {mode,duration,language,level,category}
+let engine = {
+  passage:'', typed:'', mistakes:0, startTime:null, timerId:null, remaining:0,
+  running:false, finished:false, totalTimeUsed:0
+};
+
+function startRun(cfg){
+  currentRun = cfg;
+  engine = {passage:'', typed:'', mistakes:0, startTime:null, timerId:null, remaining: cfg.duration||0, running:false, finished:false, totalTimeUsed:0};
+  document.body.setAttribute('dir-lang', cfg.language);
+  document.getElementById('passageEl').style.direction = RTL_LANGS[cfg.language] ? 'rtl':'ltr';
+  document.getElementById('runModeLabel').textContent = cfg.mode==='test' ? 'Timed test' : 'Practice · '+cfg.category;
+  document.getElementById('pillTimer').style.visibility = cfg.mode==='test' ? 'visible':'hidden';
+  buildInitialPassage();
+  renderPassage();
+  updateLiveStats();
+  document.getElementById('timeLeft').textContent = cfg.mode==='test' ? formatTime(engine.remaining) : '∞';
+  buildVirtualKeyboard();
+  document.getElementById('vkb').classList.toggle('hidden', !settings.keyboard);
+  const input = document.getElementById('typingInput');
+  input.value='';
+  document.getElementById('focusCover').classList.remove('hidden');
+  showScreen('run');
+  setTimeout(()=>{ input.focus(); },50);
+}
+
+function buildInitialPassage(){
+  let text='';
+  const target = currentRun.mode==='test' ? 500 : 140;
+  while(text.length < target){
+    text += (text?' ':'') + genChunk(currentRun.category, currentRun.language, currentRun.level);
+  }
+  engine.passage = text;
+}
+function extendPassageIfNeeded(){
+  const remainingChars = engine.passage.length - engine.typed.length;
+  if(remainingChars < 60){
+    engine.passage += ' ' + genChunk(currentRun.category, currentRun.language, currentRun.level);
+    renderPassage();
+  }
+}
+
+function renderPassage(){
+  const el = document.getElementById('passageEl');
+  const frag = document.createDocumentFragment();
+  const p = engine.passage, t = engine.typed;
+  for(let i=0;i<p.length;i++){
+    const span = document.createElement('span');
+    span.textContent = p[i];
+    if(i < t.length){
+      span.className = (t[i]===p[i]) ? 'correct':'incorrect';
+    } else if(i === t.length){
+      span.className = 'current';
+    } else {
+      span.className = 'pending';
+    }
+    frag.appendChild(span);
+  }
+  el.innerHTML='';
+  el.appendChild(frag);
+  const cur = el.querySelector('.current');
+  if(cur) cur.scrollIntoView({block:'nearest', inline:'nearest'});
+}
+
+function formatTime(sec){
+  sec = Math.max(0, Math.round(sec));
+  const m = Math.floor(sec/60), s = sec%60;
+  return (m>0 ? m+':'+String(s).padStart(2,'0') : s+'s');
+}
+
+function updateLiveStats(){
+  const t = engine.typed, p = engine.passage;
+  let correct=0;
+  for(let i=0;i<t.length;i++) if(t[i]===p[i]) correct++;
+  const incorrect = t.length - correct;
+  const elapsedMin = engine.startTime ? Math.max((Date.now()-engine.startTime)/60000, 1/60) : 1/60;
+  const wpm = engine.startTime ? Math.round((correct/5)/elapsedMin) : 0;
+  const acc = t.length>0 ? Math.round((correct/t.length)*100) : 100;
+  document.getElementById('liveWpm').textContent = wpm;
+  document.getElementById('liveAcc').textContent = acc+'%';
+  document.getElementById('liveErr').textContent = engine.mistakes;
+}
+
+function beep(freq, dur){
+  if(!settings.sound) return;
+  try{
+    const ctx = beep._ctx || (beep._ctx = new (window.AudioContext||window.webkitAudioContext)());
+    const osc = ctx.createOscillator(); const gain = ctx.createGain();
+    osc.frequency.value = freq; osc.type='square';
+    gain.gain.setValueAtTime(0.05, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+dur);
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.start(); osc.stop(ctx.currentTime+dur);
+  }catch(e){}
+}
+
+const typingInput = document.getElementById('typingInput');
+typingInput.addEventListener('focus', ()=> document.getElementById('focusCover').classList.add('hidden'));
+typingInput.addEventListener('blur', ()=>{ if(!engine.finished) document.getElementById('focusCover').classList.remove('hidden'); });
+document.getElementById('focusCover').addEventListener('click', ()=> typingInput.focus());
+document.getElementById('passageEl').addEventListener('click', ()=> typingInput.focus());
+
+typingInput.addEventListener('input', (e)=>{
+  if(engine.finished) return;
+  const val = e.target.value;
+  if(!engine.running){
+    engine.running = true;
+    engine.startTime = Date.now();
+    if(currentRun.mode==='test') startTimer();
+  }
+  if(val.length > engine.typed.length){
+    const idx = val.length-1;
+    if(val[idx] !== engine.passage[idx]){ engine.mistakes++; beep(160,.08); }
+    else beep(720,.03);
+  }
+  engine.typed = val;
+  extendPassageIfNeeded();
+  renderPassage();
+  updateLiveStats();
+  if(currentRun.mode==='practice' && engine.typed.length >= engine.passage.length){
+    finishRun();
+  }
+});
+
+function startTimer(){
+  document.getElementById('timeLeft').textContent = formatTime(engine.remaining);
+  engine.timerId = setInterval(()=>{
+    engine.remaining -= 1;
+    document.getElementById('timeLeft').textContent = formatTime(engine.remaining);
+    if(engine.remaining <= 0){ finishRun(); }
+  },1000);
+}
+function stopEngine(){
+  if(engine.timerId){ clearInterval(engine.timerId); engine.timerId=null; }
+}
+
+function finishRun(){
+  if(engine.finished) return;
+  engine.finished = true;
+  stopEngine();
+  const t = engine.typed, p = engine.passage;
+  let correct=0;
+  for(let i=0;i<t.length;i++) if(t[i]===p[i]) correct++;
+  const incorrect = t.length-correct;
+  const elapsedSec = engine.startTime ? (Date.now()-engine.startTime)/1000 : 0;
+  const elapsedMin = Math.max(elapsedSec/60, 1/600);
+  const netWpm = Math.round((correct/5)/elapsedMin);
+  const grossWpm = Math.round((t.length/5)/elapsedMin);
+  const acc = t.length>0 ? Math.round((correct/t.length)*100) : 100;
+
+  document.getElementById('resWpm').textContent = netWpm;
+  document.getElementById('resAcc').textContent = acc+'%';
+  document.getElementById('resCorrect').textContent = correct;
+  document.getElementById('resIncorrect').textContent = incorrect;
+  document.getElementById('resTotal').textContent = t.length;
+  document.getElementById('resMistakes').textContent = engine.mistakes;
+  document.getElementById('resTime').textContent = formatTime(elapsedSec);
+  document.getElementById('resGross').textContent = grossWpm;
+  document.getElementById('resultSub').textContent = currentRun.mode==='test'
+    ? 'Timed test · '+currentRun.language.toUpperCase()+' · '+currentRun.level
+    : 'Practice · '+currentRun.category+' · '+currentRun.level;
+
+  stats.push({
+    date:new Date().toISOString(), mode:currentRun.mode, category:currentRun.category,
+    language:currentRun.language, level:currentRun.level,
+    wpm:netWpm, grossWpm, accuracy:acc, correct, incorrect, total:t.length,
+    mistakes:engine.mistakes, timeTaken:Math.round(elapsedSec)
+  });
+  if(stats.length>300) stats = stats.slice(stats.length-300);
+  saveStats();
+  updateAchievements();
+  if(currentRun.daily) markDailyComplete();
+  showScreen('result');
+}
+
+document.getElementById('quitRunBtn').addEventListener('click', ()=>{
+  stopEngine();
+  showScreen(currentRun && currentRun.mode==='test' ? 'test-setup' : 'practice-setup');
+});
+document.getElementById('restartRunBtn').addEventListener('click', ()=>{
+  if(currentRun) startRun(currentRun);
+});
+document.getElementById('tryAgainBtn').addEventListener('click', ()=>{
+  if(currentRun) startRun(currentRun);
+});
+
+/* ---------------- Virtual keyboard ---------------- */
+const KB_ROWS = [
+  [['`','~'],['1','!'],['2','@'],['3','#'],['4','$'],['5','%'],['6','^'],['7','&'],['8','*'],['9','('],['0',')'],['-','_'],['=','+']],
+  [['q','Q'],['w','W'],['e','E'],['r','R'],['t','T'],['y','Y'],['u','U'],['i','I'],['o','O'],['p','P'],['[','{'],[']','}']],
+  [['a','A'],['s','S'],['d','D'],['f','F'],['g','G'],['h','H'],['j','J'],['k','K'],['l','L'],[';',':'],["'",'"']],
+  [['z','Z'],['x','X'],['c','C'],['v','V'],['b','B'],['n','N'],['m','M'],[',','<'],['.','>'],['/','?']]
+];
+function buildVirtualKeyboard(){
+  const kb = document.getElementById('vkb');
+  kb.innerHTML='';
+  KB_ROWS.forEach((row, ri)=>{
+    const rowEl = document.createElement('div'); rowEl.className='vkb-row';
+    if(ri===1){ const tab=document.createElement('div'); tab.className='vkey wide'; tab.innerHTML='<div class="bottom">Tab</div>'; tab.dataset.special='Tab'; rowEl.appendChild(tab); }
+    if(ri===2){ const caps=document.createElement('div'); caps.className='vkey wide'; caps.innerHTML='<div class="bottom">Caps</div>'; caps.dataset.special='CapsLock'; rowEl.appendChild(caps); }
+    if(ri===3){ const sh=document.createElement('div'); sh.className='vkey wide'; sh.innerHTML='<div class="bottom">Shift</div>'; sh.dataset.special='Shift'; rowEl.appendChild(sh); }
+    row.forEach(([lo,hi])=>{
+      const key = document.createElement('div'); key.className='vkey';
+      key.dataset.lo=lo; key.dataset.hi=hi;
+      key.innerHTML = '<div class="top">'+hi+'</div><div class="bottom">'+lo+'</div>';
+      rowEl.appendChild(key);
+    });
+    if(ri===3){ const sh=document.createElement('div'); sh.className='vkey wide'; sh.innerHTML='<div class="bottom">Shift</div>'; sh.dataset.special='Shift'; rowEl.appendChild(sh); }
+    if(ri===2){ const ent=document.createElement('div'); ent.className='vkey wide'; ent.innerHTML='<div class="bottom">Enter</div>'; ent.dataset.special='Enter'; rowEl.appendChild(ent); }
+    kb.appendChild(rowEl);
+  });
+  const lastRow = document.createElement('div'); lastRow.className='vkb-row';
+  const back = document.createElement('div'); back.className='vkey wide'; back.innerHTML='<div class="bottom">⌫ Back</div>'; back.dataset.special='Backspace';
+  const space = document.createElement('div'); space.className='vkey space'; space.innerHTML='<div class="bottom">Space</div>'; space.dataset.special=' ';
+  lastRow.appendChild(back); lastRow.appendChild(space);
+  kb.appendChild(lastRow);
+
+  kb.querySelectorAll('.vkey').forEach(k=>{
+    k.addEventListener('mousedown', e=>{ e.preventDefault(); pressVirtualKey(k); });
+    k.addEventListener('touchstart', e=>{ e.preventDefault(); pressVirtualKey(k); }, {passive:false});
+  });
+}
+function pressVirtualKey(k){
+  typingInput.focus();
+  const special = k.dataset.special;
+  let insert = '';
+  if(special==='Backspace'){
+    const v = typingInput.value;
+    typingInput.value = v.slice(0,-1);
+    typingInput.dispatchEvent(new Event('input'));
+    flashKey(k); return;
+  }
+  if(special===' '){ insert=' '; }
+  else if(special==='Tab' || special==='CapsLock' || special==='Shift' || special==='Enter'){ flashKey(k); return; }
+  else { insert = vkbShiftActive ? k.dataset.hi : k.dataset.lo; }
+  typingInput.value += insert;
+  typingInput.dispatchEvent(new Event('input'));
+  flashKey(k);
+}
+function flashKey(k){ k.classList.add('active'); setTimeout(()=>k.classList.remove('active'),120); }
+let vkbShiftActive = false;
+
+document.addEventListener('keydown', (e)=>{
+  if(document.getElementById('screen-run').classList.contains('hidden')) return;
+  const kb = document.getElementById('vkb');
+  let sel = null;
+  if(e.key==='Backspace') sel = kb.querySelector('[data-special="Backspace"]');
+  else if(e.key===' ') sel = kb.querySelector('[data-special=" "]');
+  else if(e.key==='Shift'){ sel = kb.querySelector('[data-special="Shift"]'); vkbShiftActive=true; }
+  else if(e.key==='CapsLock') sel = kb.querySelector('[data-special="CapsLock"]');
+  else if(e.key==='Tab') sel = kb.querySelector('[data-special="Tab"]');
+  else if(e.key==='Enter') sel = kb.querySelector('[data-special="Enter"]');
+  else {
+    const lower = e.key.length===1 ? e.key.toLowerCase() : null;
+    if(lower){
+      sel = kb.querySelector('.vkey[data-lo="'+cssEscape(lower)+'"]') || kb.querySelector('.vkey[data-hi="'+cssEscape(e.key)+'"]');
+    }
+  }
+  if(sel){ sel.classList.add('on'); }
+});
+document.addEventListener('keyup', (e)=>{
+  const kb = document.getElementById('vkb');
+  if(e.key==='Shift') vkbShiftActive=false;
+  kb.querySelectorAll('.vkey.on').forEach(el=>el.classList.remove('on'));
+});
+function cssEscape(s){ return s.replace(/["\\]/g,'\\$&'); }
+
+/* ---------------- Progress dashboard ---------------- */
+function renderProgress(){
+  const el = document.getElementById('progressContent');
+  if(stats.length===0){
+    el.innerHTML = '<div class="empty-state"><div class="glyph">📊</div><h3>No tests yet</h3><p>Complete a typing test or practice session to see your stats here.</p></div>';
+    return;
+  }
+  const wpms = stats.map(s=>s.wpm);
+  const accs = stats.map(s=>s.accuracy);
+  const best = Math.max(...wpms);
+  const avg = Math.round(wpms.reduce((a,b)=>a+b,0)/wpms.length);
+  const bestAcc = Math.max(...accs);
+  const avgAcc = Math.round(accs.reduce((a,b)=>a+b,0)/accs.length);
+
+  let html = '<div class="progress-cards">'+
+    statCard(best,'Best WPM')+statCard(avg,'Avg WPM')+statCard(bestAcc+'%','Best Accuracy')+
+    statCard(avgAcc+'%','Avg Accuracy')+statCard(stats.length,'Tests Completed')+
+    '</div>';
+
+  const recent = stats.slice(-20);
+  const max = Math.max(...recent.map(s=>s.wpm),10);
+  html += '<div class="chart-box"><h3>WPM — last '+recent.length+' sessions</h3><div style="display:flex;align-items:flex-end;gap:5px;height:140px;">';
+  recent.forEach(s=>{
+    const h = Math.max(4, Math.round((s.wpm/max)*130));
+    html += '<div title="'+s.wpm+' WPM" style="flex:1;background:var(--accent);border-radius:4px 4px 0 0;height:'+h+'px;min-width:4px;"></div>';
+  });
+  html += '</div></div>';
+
+  const last10 = stats.slice().reverse().slice(0,10);
+  html += '<div class="chart-box"><h3>Recent Tests</h3><table class="history"><thead><tr><th>Date</th><th>Mode</th><th>Lang</th><th>Level</th><th>WPM</th><th>Acc</th><th>Mistakes</th></tr></thead><tbody>';
+  last10.forEach(s=>{
+    const d = new Date(s.date);
+    html += '<tr><td>'+d.toLocaleDateString()+'</td><td>'+s.mode+(s.category&&s.mode==='practice'?(' · '+s.category):'')+'</td><td>'+s.language.toUpperCase()+'</td><td>'+s.level+'</td><td>'+s.wpm+'</td><td>'+s.accuracy+'%</td><td>'+s.mistakes+'</td></tr>';
+  });
+  html += '</tbody></table></div>';
+  html += renderAchievementsBlock();
+  el.innerHTML = html;
+}
+function statCard(v,l){ return '<div class="stat-card"><div class="v">'+v+'</div><div class="l">'+l+'</div></div>'; }
+
+
+/* ---------------- Advanced dashboard / daily challenge ---------------- */
+function todayKey(){
+  const d=new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function getDailyState(){
+  try{return JSON.parse(localStorage.getItem('typingpro_daily'))||{};}catch(e){return {};}
+}
+function saveDailyState(x){try{localStorage.setItem('typingpro_daily',JSON.stringify(x));}catch(e){}}
+function getStreak(){
+  const d=getDailyState();
+  if(!d.lastDate) return 0;
+  const last=new Date(d.lastDate+'T00:00:00');
+  const now=new Date(todayKey()+'T00:00:00');
+  const diff=Math.round((now-last)/86400000);
+  return diff<=1 ? (d.streak||0) : 0;
+}
+function markDailyComplete(){
+  const key=todayKey(), d=getDailyState();
+  if(d.completedDate===key) return;
+  const streak=getStreak()+1;
+  saveDailyState({lastDate:key,completedDate:key,streak});
+}
+function renderDaily(){
+  const key=todayKey(), d=getDailyState();
+  document.getElementById('dailyDate').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('dailyStreak').textContent=getStreak();
+  const done=d.completedDate===key;
+  const todayTests=stats.filter(s=>s.daily && s.date.slice(0,10)===key);
+  const best=todayTests.length?Math.max(...todayTests.map(s=>s.wpm)):0;
+  document.getElementById('dailyStats').innerHTML =
+    '<div class="stat-card"><div class="v">'+(done?'✓':'—')+'</div><div class="l">'+(done?'Completed':'Not completed')+'</div></div>'+
+    '<div class="stat-card"><div class="v">'+best+'</div><div class="l">Today best WPM</div></div>'+
+    '<div class="stat-card"><div class="v">'+(getBestWpm())+'</div><div class="l">Personal best</div></div>';
+  const btn=document.getElementById('startDailyBtn');
+  btn.textContent=done?'Try Daily Challenge Again →':'Start Daily Challenge →';
+}
+function getBestWpm(){ return stats.length?Math.max(...stats.map(s=>s.wpm)):0; }
+
+function getAchievements(){
+  const a=[];
+  const best=getBestWpm();
+  if(stats.length>=1) a.push(['🎯','First Test','Completed your first session.']);
+  if(best>=30) a.push(['⚡','30 WPM','Reached 30 WPM.']);
+  if(best>=50) a.push(['🚀','50 WPM','Reached 50 WPM.']);
+  if(best>=80) a.push(['🔥','80 WPM','Reached 80 WPM.']);
+  if(best>=100) a.push(['🏆','100 WPM','Reached 100 WPM.']);
+  if(stats.some(s=>s.accuracy>=100)) a.push(['🎯','Perfect Accuracy','Finished a session with 100% accuracy.']);
+  if(stats.length>=10) a.push(['📚','10 Sessions','Completed 10 sessions.']);
+  if(stats.length>=50) a.push(['💎','50 Sessions','Completed 50 sessions.']);
+  if(getStreak()>=7) a.push(['🔥','7 Day Streak','Completed daily challenges for 7 days.']);
+  return a;
+}
+function updateAchievements(){ renderHomeDashboard(); }
+function renderHomeDashboard(){
+  const el=document.getElementById('homeDashboard'); if(!el)return;
+  const best=getBestWpm(), total=stats.length, streak=getStreak(), goal=settings.goal||50;
+  const today=stats.filter(s=>s.date.slice(0,10)===todayKey());
+  const todayBest=today.length?Math.max(...today.map(s=>s.wpm)):0;
+  const pct=Math.min(100,Math.round((todayBest/goal)*100));
+  const ach=getAchievements();
+  el.innerHTML =
+    '<div class="dash-card"><span>PERSONAL BEST</span><b>'+best+' WPM</b><small>'+total+' sessions completed</small></div>'+
+    '<div class="dash-card"><span>DAILY STREAK</span><b>🔥 '+streak+'</b><small>'+(streak?'Keep it going!':'Start today’s challenge')+'</small></div>'+
+    '<div class="dash-card"><span>TODAY GOAL</span><b>'+todayBest+' / '+goal+' WPM</b><div class="goal-bar"><i style="width:'+pct+'%"></i></div></div>'+
+    '<div class="dash-card"><span>ACHIEVEMENTS</span><b>🏅 '+ach.length+'</b><small>Milestones unlocked</small></div>';
+}
+function renderAchievementsBlock(){
+  const ach=getAchievements();
+  if(!ach.length) return '<div class="chart-box"><h3>Achievements</h3><div class="empty-state">Complete your first test to unlock achievements.</div></div>';
+  return '<div class="chart-box"><h3>Achievements</h3><div class="achievement-grid">'+ach.map(x=>'<div class="achievement"><div class="badge">'+x[0]+'</div><div><b>'+x[1]+'</b><small>'+x[2]+'</small></div></div>').join('')+'</div></div>';
+}
+
+function exportHistoryCSV(){
+  if(!stats.length){alert('No typing history to export yet.');return;}
+  const headers=['Date','Mode','Category','Language','Level','WPM','Gross WPM','Accuracy','Correct','Incorrect','Total','Mistakes','Time'];
+  const rows=stats.map(s=>[s.date,s.mode,s.category||'',s.language,s.level,s.wpm,s.grossWpm,s.accuracy,s.correct,s.incorrect,s.total,s.mistakes,s.timeTaken]);
+  const csv=[headers,...rows].map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+  downloadText('typing-pro-history.csv','data:text/csv;charset=utf-8,'+encodeURIComponent(csv));
+}
+function downloadText(name,href){
+  const a=document.createElement('a');a.href=href;a.download=name;document.body.appendChild(a);a.click();a.remove();
+}
+function shareResult(){
+  const w=document.getElementById('resWpm').textContent, a=document.getElementById('resAcc').textContent;
+  const message='I scored '+w+' WPM with '+a+' accuracy on Typing Pro! ⌨️';
+  if(navigator.share) navigator.share({title:'My Typing Pro Result',text:message,url:location.href}).catch(()=>{});
+  else if(navigator.clipboard){navigator.clipboard.writeText(message+' '+location.href).then(()=>alert('Result copied to clipboard!')).catch(()=>alert(message));}
+  else alert(message);
+}
+function exportCurrentResult(){
+  const rows=[
+    ['Typing Pro Result',''],
+    ['WPM',document.getElementById('resWpm').textContent],
+    ['Accuracy',document.getElementById('resAcc').textContent],
+    ['Correct characters',document.getElementById('resCorrect').textContent],
+    ['Incorrect characters',document.getElementById('resIncorrect').textContent],
+    ['Mistakes',document.getElementById('resMistakes').textContent],
+    ['Time',document.getElementById('resTime').textContent]
+  ];
+  const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+  downloadText('typing-pro-result.csv','data:text/csv;charset=utf-8,'+encodeURIComponent(csv));
+}
+
+/* ---------------- Settings screen wiring ---------------- */
+function syncSettingsUI(){
+  document.getElementById('setThemeDark').classList.toggle('selected', settings.theme==='dark');
+  document.getElementById('setThemeLight').classList.toggle('selected', settings.theme==='light');
+  document.getElementById('setLanguage').value = settings.language;
+  document.getElementById('setFontSize').value = settings.fontSize;
+  document.getElementById('fontSizeVal').textContent = Math.round(settings.fontSize*100)+'%';
+  document.getElementById('setTypeSize').value = settings.typeSize;
+  document.getElementById('typeSizeVal').textContent = Math.round(settings.typeSize*100)+'%';
+  document.getElementById('setTimerDefault').value = settings.timerDefault;
+  document.getElementById('setSound').checked = settings.sound;
+  document.getElementById('setKeyboard').checked = settings.keyboard;
+  document.getElementById('setGoal').value = settings.goal||50;
+  document.getElementById('goalVal').textContent = (settings.goal||50)+' WPM';
+}
+document.getElementById('setThemeDark').addEventListener('click', ()=>{ settings.theme='dark'; applyTheme(); saveSettings(); syncSettingsUI(); });
+document.getElementById('setThemeLight').addEventListener('click', ()=>{ settings.theme='light'; applyTheme(); saveSettings(); syncSettingsUI(); });
+document.getElementById('setLanguage').addEventListener('change', e=>{
+  settings.language = e.target.value; saveSettings();
+  document.querySelectorAll('#testLangChips .chip').forEach(c=>c.classList.toggle('selected', c.dataset.lang===settings.language));
+  document.querySelectorAll('#practiceLangChips .chip').forEach(c=>c.classList.toggle('selected', c.dataset.lang===settings.language));
+  testConfig.language = settings.language; practiceConfig.language = settings.language;
+});
+document.getElementById('setFontSize').addEventListener('input', e=>{
+  settings.fontSize = parseFloat(e.target.value); applyGlobalStyles(); saveSettings();
+  document.getElementById('fontSizeVal').textContent = Math.round(settings.fontSize*100)+'%';
+});
+document.getElementById('setTypeSize').addEventListener('input', e=>{
+  settings.typeSize = parseFloat(e.target.value); applyGlobalStyles(); saveSettings();
+  document.getElementById('typeSizeVal').textContent = Math.round(settings.typeSize*100)+'%';
+});
+document.getElementById('setTimerDefault').addEventListener('change', e=>{
+  settings.timerDefault = parseInt(e.target.value,10); saveSettings();
+  document.querySelectorAll('#durationChips .chip').forEach(c=>c.classList.toggle('selected', c.dataset.dur===String(settings.timerDefault)));
+  testConfig.duration = settings.timerDefault;
+});
+document.getElementById('setSound').addEventListener('change', e=>{ settings.sound=e.target.checked; saveSettings(); });
+document.getElementById('setKeyboard').addEventListener('change', e=>{ settings.keyboard=e.target.checked; saveSettings(); });
+document.getElementById('setGoal').addEventListener('input', e=>{
+  settings.goal=parseInt(e.target.value,10); saveSettings();
+  document.getElementById('goalVal').textContent=settings.goal+' WPM';
+  renderHomeDashboard();
+});
+document.getElementById('exportHistoryBtn').addEventListener('click', exportHistoryCSV);
+document.getElementById('shareResultBtn').addEventListener('click', shareResult);
+document.getElementById('exportResultBtn').addEventListener('click', exportCurrentResult);
+document.getElementById('resetDataBtn').addEventListener('click', ()=>{
+  if(confirm('This will clear all settings and test history from this device. Continue?')){
+    localStorage.removeItem('typeforge_settings');
+    localStorage.removeItem('typeforge_stats');
+    localStorage.removeItem('typingpro_daily');
+    settings = Object.assign({}, DEFAULT_SETTINGS);
+    stats = [];
+    applyTheme(); applyGlobalStyles(); syncSettingsUI(); renderHomeDashboard();
+    showScreen('home');
+  }
+});
+
+/* ---------------- Init ---------------- */
+function init(){
+  applyTheme();
+  applyGlobalStyles();
+  syncSettingsUI();
+  testConfig.language = settings.language;
+  practiceConfig.language = settings.language;
+  testConfig.duration = settings.timerDefault;
+  document.querySelectorAll('#testLangChips .chip, #practiceLangChips .chip').forEach(c=>c.classList.toggle('selected', c.dataset.lang===settings.language));
+  document.querySelectorAll('#durationChips .chip').forEach(c=>c.classList.toggle('selected', c.dataset.dur===String(settings.timerDefault)));
+  renderHomeDashboard();
+  showScreen('home');
+}
+init();
+
+})();
+</script>
+</body>
+</html>
